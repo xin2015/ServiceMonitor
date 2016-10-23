@@ -12,8 +12,8 @@ namespace ServiceMonitor
     class ServiceMonitorJob : IJob
     {
         private static ILog logger;
-        public static string CronExpression { get; set; }
 
+        public static string CronExpression { get; set; }
         public static string MonitorServiceName { get; set; }
 
         static ServiceMonitorJob()
@@ -22,6 +22,7 @@ namespace ServiceMonitor
             CronExpression = Configuration.ServiceMonitorJobCronExpression;
             MonitorServiceName = Configuration.MeteorologyDataService;
         }
+
         public void Execute(IJobExecutionContext context)
         {
             try
@@ -51,15 +52,6 @@ namespace ServiceMonitor
                 else
                 {
                     logger.WarnFormat("服务{0}不存在，请检查服务配置。", MonitorServiceName);
-                }
-                try
-                {
-                    string[] a = new string[] { "" };
-                    string b = a[2];
-                }
-                catch (Exception e)
-                {
-                    SmtpHelper.Default.Send("仅测试邮件发送功能，请忽略", e.Message, Configuration.MailTo.Split(','));
                 }
             }
             catch (Exception e)
