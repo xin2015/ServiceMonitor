@@ -13,6 +13,7 @@ namespace ServiceMonitor
         public static string DisplayName { get; private set; }
         public static string ServiceName { get; private set; }
         public static string ServiceMonitorJobCronExpression { get; private set; }
+        public static string WebsiteMonitorJobCronExpression { get; private set; }
         public static string MeteorologyDataService { get; private set; }
         public static string MailHost { get; private set; }
         public static string MailUsername { get; private set; }
@@ -25,6 +26,7 @@ namespace ServiceMonitor
             DisplayName = ConfigurationManager.AppSettings["DisplayName"];
             ServiceName = ConfigurationManager.AppSettings["ServiceName"];
             ServiceMonitorJobCronExpression = ConfigurationManager.AppSettings["ServiceMonitorJobCronExpression"];
+            WebsiteMonitorJobCronExpression = ConfigurationManager.AppSettings["WebsiteMonitorJobCronExpression"];
             MeteorologyDataService = ConfigurationManager.AppSettings["MeteorologyDataService"];
             MailHost = ConfigurationManager.AppSettings["MailHost"];
             MailUsername = ConfigurationManager.AppSettings["MailUsername"];
@@ -38,6 +40,7 @@ namespace ServiceMonitor
 
             string defaultExpression = "0 0 * * * ?";
             ServiceMonitorJobCronExpression = string.IsNullOrWhiteSpace(ServiceMonitorJobCronExpression) ? defaultExpression : ServiceMonitorJobCronExpression;
+            WebsiteMonitorJobCronExpression = string.IsNullOrWhiteSpace(WebsiteMonitorJobCronExpression) ? defaultExpression : WebsiteMonitorJobCronExpression;
 
             MeteorologyDataService = string.IsNullOrWhiteSpace(MeteorologyDataService) ? "MeteorologyData" : MeteorologyDataService;
             MailHost = string.IsNullOrWhiteSpace(MailHost) ? "smtp.126.com" : MailHost;

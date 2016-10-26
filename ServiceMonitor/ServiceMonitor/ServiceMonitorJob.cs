@@ -56,7 +56,9 @@ namespace ServiceMonitor
             }
             catch (Exception e)
             {
-                logger.Error("监控服务出错。", e);
+                string subject = "监控服务出错。";
+                SmtpHelper.Default.Send(subject, e.Message, Configuration.MailTo.Split(','));
+                logger.Fatal(subject, e);
             }
         }
     }
