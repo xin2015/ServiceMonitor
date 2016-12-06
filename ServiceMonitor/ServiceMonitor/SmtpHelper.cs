@@ -20,7 +20,7 @@ namespace ServiceMonitor
         /// <summary>
         /// 用户名
         /// </summary>
-        public string Username { get; private set; }
+        public string UserName { get; private set; }
         /// <summary>
         /// 密码
         /// </summary>
@@ -33,7 +33,7 @@ namespace ServiceMonitor
         static SmtpHelper()
         {
             string host = Configuration.MailHost;
-            string username = Configuration.MailUsername;
+            string username = Configuration.MailUserName;
             string password = Configuration.MailPassword;
             Default = new SmtpHelper(host, username, password);
         }
@@ -47,7 +47,7 @@ namespace ServiceMonitor
         public SmtpHelper(string host, string username, string password)
         {
             Host = host;
-            Username = username;
+            UserName = username;
             Password = password;
         }
 
@@ -62,11 +62,11 @@ namespace ServiceMonitor
             using (SmtpClient sc = new SmtpClient())
             {
                 sc.Host = Host;
-                sc.Credentials = new NetworkCredential(Username, Password);
+                sc.Credentials = new NetworkCredential(UserName, Password);
                 sc.EnableSsl = true;
 
                 MailMessage mm = new MailMessage();
-                mm.From = new MailAddress(Username);
+                mm.From = new MailAddress(UserName);
                 foreach (string toAddress in to)
                 {
                     mm.To.Add(toAddress);
@@ -93,7 +93,7 @@ namespace ServiceMonitor
             using (SmtpClient sc = new SmtpClient())
             {
                 sc.Host = Host;
-                sc.Credentials = new NetworkCredential(Username, Password);
+                sc.Credentials = new NetworkCredential(UserName, Password);
                 sc.EnableSsl = true;
 
                 MailMessage mm = new MailMessage();
@@ -118,7 +118,7 @@ namespace ServiceMonitor
                         mm.Attachments.Add(item);
                     }
                 }
-                mm.Sender = new MailAddress(Username);
+                mm.Sender = new MailAddress(UserName);
                 sc.Send(mm);
                 mm.Dispose();
             }
